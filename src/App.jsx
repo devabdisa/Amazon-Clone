@@ -1,5 +1,11 @@
+import Header from "./Components/Header/Header";
+
 const App = () => {
-  return <div>Amazon Clone</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default App;
