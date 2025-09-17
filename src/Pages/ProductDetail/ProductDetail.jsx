@@ -26,7 +26,17 @@ function ProductDetail() {
   console.log(product);
   return (
     <Layout>
-      {isLoading ? <Spinner /> : <ProductCard product={product} flag />}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <ProductCard
+          product={product}
+          flag
+          flex={true}
+          renderDisc={true}
+          renderAdd={true}
+        />
+      )}
     </Layout>
   );
 }
