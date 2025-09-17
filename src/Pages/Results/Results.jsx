@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./Results.module.css";
+import classes from "./Results.module.css";
 import { useParams } from "react-router-dom";
-import { productUrl } from "../../Api/endPoint";
-import Loader from "../../components/Loader/Loader";
+import { productUrl } from "../../Api/endPoints"; 
 import Layout from "../../Components/LayOut/LayOut";
 import ProductCard from "../../Components/Product/ProductCard";
+import Spinner from "../../Components/Loader/Spinner";
 
 
 function Results() {
@@ -33,14 +33,14 @@ function Results() {
   return (
     <>
       <Layout>
-        <section className={styles.results__container}>
+        <section className={classes.results__container}>
           <h1 style={{ padding: "2rem" }}>Results</h1>
           <p style={{ padding: "2rem" }}>Category / {categoryName}</p>
           <hr />
           {isLoading ? (
-            <Loader />
+            <Spinner />
           ) : (
-            <div className={styles.products__container}>
+            <div className={classes.products__container}>
               {results?.map((product) => (
                 <ProductCard
                   key={product.id}

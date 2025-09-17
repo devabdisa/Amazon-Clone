@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import Spinner from "../../components/Loading/Spinner";
 import ProductCard from "../../Components/Product/ProductCard";
 import Layout from "../../Components/LayOut/LayOut";
+import Spinner from "../../Components/Loader/Spinner";
 
 function ProductDetail() {
   const { productId } = useParams();

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Product.module.css";
+import classes from "./Product.module.css";
 import axios from "axios";
 import ProductCard from "./ProductCard";
-import Loader from "../Loader/Loader";
+import Spinner from "../Loader/Spinner";
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -27,9 +27,9 @@ function Product() {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <Spinner />
       ) : (
-        <section className={styles.products__container}>
+        <section className={classes.products__container}>
           {products?.map((singleProdut) => (
             <ProductCard
               key={singleProdut.id}
