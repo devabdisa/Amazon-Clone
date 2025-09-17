@@ -1,21 +1,24 @@
+// import { Link } from "react-router-dom";
 import { SlLocationPin } from "react-icons/sl";
 import { BsSearch } from "react-icons/bs";
 import { BiCart } from "react-icons/bi";
 import styles from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+function Header() {
   return (
     <section className={styles.fixed}>
       <section>
         <div className={styles.header__container}>
           {/* logo section */}
           <div className={styles.logo__container}>
-            <img
-              src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
-              alt="amazon logo"
-            />
-
+            <Link to="/">
+              <img
+                src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
+                alt="amazon logo"
+              />
+            </Link>
             <div className={styles.delivery}>
               <span>
                 <SlLocationPin />
@@ -36,25 +39,33 @@ const Header = () => {
           </div>
           {/* other section */}
           <div className={styles.order__container}>
-            {/* <img
-              src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1024px-Flag_of_the_United_States.svg.png"
-              alt=""
-            /> */}
+            <Link to="" className={styles.language}>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1024px-Flag_of_the_United_States.svg.png"
+                alt=""
+              />
 
-            <select name="" id="">
-              <option value="">EN</option>
-            </select>
-
-            <p>returns</p>
-            <span>& Orders</span>
-
-            <BiCart size={35} />
+              <select name="" id="">
+                <option value="">EN</option>
+              </select>
+            </Link>
+            <Link>
+              <p>Hello, Sign In</p>
+              <span>Account & Lists</span>
+            </Link>
+            <Link to="/orders">
+              <p>returns</p>
+              <span>& Orders</span>
+            </Link>
+            <Link to="/cart" className={styles.cart}>
+              <BiCart size={35} />
+            </Link>
           </div>
         </div>
       </section>
       <LowerHeader />
     </section>
   );
-};
+}
 
 export default Header;
