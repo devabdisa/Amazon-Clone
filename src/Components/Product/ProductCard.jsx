@@ -2,6 +2,7 @@ import { useState } from "react";
 import CurrencyFormatter from "../CurrencyFormatter/CurrencyFormatter";
 import classes from "./product.module.css";
 import Rating from "@mui/material/Rating";
+import { Link } from "react-router-dom";
 
 function ProductCard({ product, flag, cart }) {
   const { image, title, rating, price, id, description } = product;
@@ -20,7 +21,9 @@ function ProductCard({ product, flag, cart }) {
         flag ? classes.product__flexed : ""
       }`}
     >
-      <img src={image} alt="" className={classes.img_container} />
+      <Link to={`/product/${id}`}>
+        <img src={image} alt="" className={classes.img_container} />
+      </Link>
 
       <div>
         <h3>{title}</h3>
