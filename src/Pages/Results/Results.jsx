@@ -1,39 +1,59 @@
-import { useEffect, useState } from "react";
-import Layout from "../../Components/LayOut/LayOut";
-// import classes from './Results.module.css'
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { productUrl } from "../../Api/endPoints";
-import classes from "./Results.module.css";
+import styles from "./Results.module.css";
+import { useParams } from "react-router-dom";
+import { productUrl } from "../../Api/endPoint";
+import Loader from "../../components/Loader/Loader";
+import Layout from "../../Components/LayOut/LayOut";
 import ProductCard from "../../Components/Product/ProductCard";
-const Result = () => {
+
+
+function Results() {
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { categoryName } = useParams();
+
   useEffect(() => {
-    axios
-      .get(`${productUrl}/products/category/${categoryName}`)
-      .then((res) => {
-        setResults(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    (async () => {
+      setIsLoading(true);
+      try {
+        let request = await axios.get(
+          `${productUrl}/products/category/${categoryName}`
+        );
+        console.log(request);
+        setResults(request.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
   return (
-    <Layout>
-      <section>
-        <h1 style={{ padding: "30px" }}>Results</h1>
-        <p style={{ padding: "30px" }}>Category / {categoryName}</p>
-        <hr />
-        <div className={classes.products_container}>
-          {results?.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
-    </Layout>
+    <>
+      <Layout>
+        <section className={styles.results__container}>
+          <h1 style={{ padding: "2rem" }}>Results</h1>
+          <p style={{ padding: "2rem" }}>Category / {categoryName}</p>
+          <hr />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <div className={styles.products__container}>
+              {results?.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  renderAdd={true}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      </Layout>
+    </>
   );
-};
+}
 
-export default Result;
+export default Results;
