@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useContext } from "react";
 import CurrencyFormatter from "../CurrencyFormatter/CurrencyFormatter";
 import classes from "./product.module.css";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
+import { Type } from "../../Utility/action.type";
+import { DataContext } from "../DataProvider/DataProvider";
 
 function ProductCard({ product, flag, cart }) {
   const { image, title, rating, price, id, description } = product;
 
-  // Local state to manage basket
-  const [basket, setBasket] = useState([]);
+  const [state, dispatch] = useContext(DataContext);
 
   const addToCart = () => {
-    setBasket((prevBasket) => [...prevBasket, product]);
-    console.log([...basket, product]);
+    dispatch({
+      type: Type.ADD_TO_BASKET,
+      item: {
+        title,
+        image,
+        id,
+        price,
+        rating,
+        description,
+      },
+    });
   };
 
   return (
