@@ -3,8 +3,8 @@ import axios from "axios";
 import classes from "./Results.module.css";
 import { useParams } from "react-router-dom";
 import { productUrl } from "../../Api/endPoints"; 
-import Layout from "../../Components/LayOut/LayOut";
-import ProductCard from "../../Components/Product/ProductCard";
+import Layout from "../../components/LayOut/LayOut";
+import ProductCard from "../../components/Product/ProductCard";
 import Spinner from "../../Components/Loader/Spinner";
 
 
@@ -45,6 +45,7 @@ function Results() {
                 <ProductCard
                   key={product.id}
                   product={product}
+                  renderDesc={false}
                   renderAdd={true}
                 />
               ))}

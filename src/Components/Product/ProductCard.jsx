@@ -1,14 +1,13 @@
 import { useContext } from "react";
-import CurrencyFormatter from "../CurrencyFormatter/CurrencyFormatter";
-import classes from "./product.module.css";
 import Rating from "@mui/material/Rating";
+import styles from "./Product.module.css";
 import { Link } from "react-router-dom";
-import { Type } from "../../Utility/action.type";
+import CurrencyFormatter from "../CurrencyFormatter/CurrencyFormatter";
 import { DataContext } from "../DataProvider/DataProvider";
+import { Type } from "../../Utility/action.type";
 
-function ProductCard({ product, flag, cart }) {
-  const { image, title, rating, price, id, description } = product;
-
+function ProductCard({ product, flex, renderDesc, renderAdd }) {
+  const { title, image, id, price, rating, description } = product;
   const [state, dispatch] = useContext(DataContext);
 
   const addToCart = () => {
@@ -25,34 +24,46 @@ function ProductCard({ product, flag, cart }) {
     });
   };
 
+  function truncate(str, n) {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  }
+
   return (
-    <div
-      className={`${classes.card__container} ${
-        flag ? classes.product__flexed : ""
-      }`}
-    >
-      <Link to={`/product/${id}`}>
-        <img src={image} alt="" className={classes.img_container} />
-      </Link>
-
-      <div>
-        <h3>{title}</h3>
-        {flag && <div style={{ maxWidth: "750px" }}>{description}</div>}
-        <div className={classes.rating}>
-          <Rating value={rating?.rate} precision={0.1} />
-          <small>{rating?.count}</small>
-        </div>
+    <>
+      <div
+        className={`${styles.card__container} ${
+          flex ? styles.product__flexed : ""
+        }`}
+      >
+        <Link to={`/product/${id}`}>
+          <img src={image} alt="" />
+        </Link>
         <div>
-          <CurrencyFormatter amount={price} />
-        </div>
+          {flex ? <h3>{title}</h3> : <h3> {truncate(title, 41)}</h3>}
+          {renderDesc && (
+            <div style={{ maxWidth: "800px", fontSize: "1.25rem" }}>
+              <p>{description}</p>
+            </div>
+          )}
+          <div className={styles.rating}>
+            {/* rating */}
+            <Rating value={rating?.rate} precision={0.1} />
+            {/* rating counter */}
+            <small>{rating?.count}</small>
+          </div>
+          <div>
+            {/* price */}
+            <CurrencyFormatter amount={price} />
+          </div>
 
-        {!cart && (
-          <button className={classes.button} onClick={addToCart}>
-            add to cart
-          </button>
-        )}
+          {renderAdd && (
+            <button className={styles.button} onClick={addToCart}>
+              Add to cart
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
