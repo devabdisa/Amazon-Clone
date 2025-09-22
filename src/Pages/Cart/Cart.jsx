@@ -11,9 +11,10 @@ import { IoIosArrowDown } from "react-icons/io";
 
 function Cart() {
   const [{ basket }, dispatch] = useContext(DataContext);
-  let total = basket.reduce((amount, item) => {
-    return item.price + amount;
-  }, 0);
+  const total = basket.reduce(
+    (amount, item) => item.price * item.amount + amount,
+    0
+  );
 
   const increment = (item) => {
     dispatch({
