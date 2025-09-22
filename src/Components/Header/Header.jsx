@@ -7,9 +7,15 @@ import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
 import { useContext } from "react";
+import { auth } from "../../Utility/firebase";
+
 
 function Header() {
-  const [{ basket }, dispatch] = useContext(DataContext);
+  const [{ basket, user }] = useContext(DataContext);
+  const totalItem = basket?.reduce((accumulator, item) => {
+    return item.quantity + accumulator;
+  }, 0);
+
   return (
     <section className={styles.fixed}>
       <section>
@@ -52,9 +58,20 @@ function Header() {
                 <option value="">EN</option>
               </select>
             </Link>
-            <Link to="/auth">
-              <p>Sign In</p>
-              <span>Account & Lists</span>
+            <Link to={!user && "/auth"}>
+              <div>
+                {user ? (
+                  <>
+                    <p>Hello {user?.email.split("@")[0]}</p>
+                    <span onClick={() => auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                  <>
+                    <p>Hello, Sign In</p>
+                    <span>Account & Lists</span>
+                  </>
+                )}
+              </div>
             </Link>
             <Link to="/orders">
               <p>returns</p>
@@ -62,7 +79,7 @@ function Header() {
             </Link>
             <Link to="/cart" className={styles.cart}>
               <BiCart size={35} />
-              <span>{basket.length}</span>
+              <span>{totalItem}</span>
             </Link>
           </div>
         </div>

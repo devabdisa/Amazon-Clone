@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter , Routes, Route } from "react-router-dom";
 import Landing from "./Pages/Landing/Landing";
 import Payment from "./Pages/Payment/Payment";
 import Orders from "./Pages/Orders/Orders";
@@ -7,9 +7,9 @@ import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 import Cart from "./Pages/Cart/Cart";
 import Auth from "./Pages/Auth/Auth";
 
-const Routing = () => {
+const Router = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
@@ -19,8 +19,8 @@ const Routing = () => {
         <Route Route path="/product/:productId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
-export default Routing;
+export default Router;

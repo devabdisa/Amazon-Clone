@@ -1,69 +1,52 @@
-import { Type } from "./action.type";
-
-// Load basket from localStorage if it exists, else use an empty array
-const storedBasket = JSON.parse(localStorage.getItem("basket")) || [];
-
 export const initialState = {
-  basket: storedBasket,
+  basket: [],
   user: null,
 };
 
-
-export const reducer = (state = initialState, action) => {
+export function reducer(state, action) {
   switch (action.type) {
-    case Type.ADD_TO_BASKET: {
-      const existingIndex = state.basket.findIndex(
-        (item) => item.id === action.item.id
+    case "ADD_TO_BASKET": // logic to avoid adding similar products to the basket rather updating their quantity
+    {
+      const itemExist = state.basket.find(
+        (product) => product.id === action.item.id
       );
-
-      if (existingIndex >= 0) {
-        // Increase quantity if item exists
-        const updatedBasket = [...state.basket];
-        updatedBasket[existingIndex] = {
-          ...updatedBasket[existingIndex],
-          amount: (updatedBasket[existingIndex].amount || 1) + 1,
-        };
-
+      if (!itemExist)
         return {
           ...state,
-          basket: updatedBasket,
+          basket: [...state.basket, { ...action.item, quantity: 1 }],
         };
-      } else {
-        // Add new item with amount = 1
-        return {
-          ...state,
-          basket: [...state.basket, { ...action.item, amount: 1 }],
-        };
+      else {
+        const updatedBasket = state.basket?.map((product) =>
+          product.id === action.item.id
+            ? { ...product, quantity: product.quantity + 1 }
+            : product
+        );
+
+        return { ...state, basket: updatedBasket };
       }
     }
 
-    case Type.REMOVE_FROM_BASKET: {
-      const existingIndex = state.basket.findIndex(
+    case "REMOVE_FROM_BASKET": {
+      const newBasket = [...state.basket];
+      const indexOfRemovedItem = newBasket.findIndex(
         (item) => item.id === action.id
       );
-
-      if (existingIndex >= 0) {
-        const updatedBasket = [...state.basket];
-        if ((updatedBasket[existingIndex].amount || 1) > 1) {
-          // Decrease amount if more than 1
-          updatedBasket[existingIndex] = {
-            ...updatedBasket[existingIndex],
-            amount: updatedBasket[existingIndex].amount - 1,
-          };
+      if (indexOfRemovedItem !== -1) {
+        if (newBasket[indexOfRemovedItem].quantity === 1) {
+          newBasket.splice(indexOfRemovedItem, 1);
         } else {
-          // Remove item completely
-          updatedBasket.splice(existingIndex, 1);
+          newBasket[indexOfRemovedItem].quantity -= 1;
         }
-
-        return {
-          ...state,
-          basket: updatedBasket,
-        };
       }
-      return state;
+      return { ...state, basket: newBasket };
     }
 
+    case "EMPTY_BASKET":
+      return { ...state, basket: [] };
+
+    case "SET_USER":
+      return { ...state, user: action.user };
     default:
       return state;
   }
-};
+}
