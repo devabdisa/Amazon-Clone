@@ -1,52 +1,66 @@
+import { Type } from "./action.type";
+
+// Load basket from localStorage if it exists, else use an empty array
+const storedBasket = JSON.parse(localStorage.getItem("basket")) || [];
+
 export const initialState = {
-  basket: [],
+  basket: storedBasket,
   user: null,
 };
 
-export function reducer(state, action) {
+// Function to update localStorage
+const updateLocalStorage = (basket) => {
+  localStorage.setItem("basket", JSON.stringify(basket));
+};
+
+// reducer listens for actions and modifies the state accordingly
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_BASKET": // logic to avoid adding similar products to the basket rather updating their quantity
-    {
-      const itemExist = state.basket.find(
-        (product) => product.id === action.item.id
+    case Type.ADD_TO_BASKET:
+      const existingItem = state.basket.find(
+        (item) => item.id === action.item.id
       );
-      if (!itemExist)
-        return {
-          ...state,
-          basket: [...state.basket, { ...action.item, quantity: 1 }],
-        };
-      else {
-        const updatedBasket = state.basket?.map((product) =>
-          product.id === action.item.id
-            ? { ...product, quantity: product.quantity + 1 }
-            : product
+
+      let updatedBasket;
+      if (!existingItem) {
+        updatedBasket = [...state.basket, { ...action.item, amount: 1 }];
+      } else {
+        updatedBasket = state.basket.map((item) =>
+          item.id === action.item.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
         );
-
-        return { ...state, basket: updatedBasket };
       }
-    }
 
-    case "REMOVE_FROM_BASKET": {
-      const newBasket = [...state.basket];
-      const indexOfRemovedItem = newBasket.findIndex(
-        (item) => item.id === action.id
-      );
-      if (indexOfRemovedItem !== -1) {
-        if (newBasket[indexOfRemovedItem].quantity === 1) {
-          newBasket.splice(indexOfRemovedItem, 1);
+      updateLocalStorage(updatedBasket); // Save to localStorage
+      return { ...state, basket: updatedBasket };
+
+    case Type.REMOVE_FROM_BASKET:
+      const index = state.basket.findIndex((item) => item.id === action.id);
+      let newBasket = [...state.basket];
+
+      if (index >= 0) {
+        if (newBasket[index].amount > 1) {
+          newBasket[index] = {
+            ...newBasket[index],
+            amount: newBasket[index].amount - 1,
+          };
         } else {
-          newBasket[indexOfRemovedItem].quantity -= 1;
+          newBasket.splice(index, 1);
         }
       }
-      return { ...state, basket: newBasket };
-    }
 
-    case "EMPTY_BASKET":
+      updateLocalStorage(newBasket); // Save to localStorage
+      return { ...state, basket: newBasket };
+
+    case Type.EMPTY_BASKET:
+      updateLocalStorage([]); // Clear localStorage
       return { ...state, basket: [] };
 
-    case "SET_USER":
+    case Type.SET_USER:
       return { ...state, user: action.user };
+
     default:
       return state;
   }
-}
+};

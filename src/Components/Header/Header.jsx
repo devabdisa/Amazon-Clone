@@ -12,9 +12,10 @@ import { auth } from "../../Utility/firebase";
 
 function Header() {
   const [{ basket, user }] = useContext(DataContext);
-  const totalItem = basket?.reduce((accumulator, item) => {
-    return item.quantity + accumulator;
-  }, 0);
+  const totalItem =
+    basket?.reduce((accumulator, item) => {
+      return item.amount + accumulator; // ← Change to "amount"
+    }, 0) || 0; // ← Add fallback for safety
 
   return (
     <section className={styles.fixed}>
