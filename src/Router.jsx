@@ -20,7 +20,7 @@ function Router() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/auth/signin" element={<Auth />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/payments"
