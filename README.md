@@ -1,12 +1,34 @@
-# React + Vite
+# 🛒 Amazon Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **full-stack Amazon clone** built with **Vite** and **React.js**, featuring authentication, cart management, orders, and **Stripe** payment integration.
 
-Currently, two official plugins are available:
+**🌐 Live Demo:** [Amazon Clone Demo](https://amazon-ecommerce-clone-dev-abdisa.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔐 **Firebase Authentication** (Sign up / Sign in / Sign out)  
+- 🛍️ **Cart Management** – Add, remove, and update products in the cart  
+- 🧾 **Orders** – Place orders and view order history  
+- 💳 **Stripe Payment Integration** – Secure online payments  
+- 📱 **Responsive UI** – Works on desktop and mobile devices  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Vite, React.js, React Router  
+- **Backend:** Node.js  
+- **Database:** Firebase Firestore  
+- **Payments:** Stripe  
+- **Deployment:** Render (backend), Netlify (frontend)  
+
+---
+
+## ⚡ Installation
+
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/devabdisa/Amazon-Clone.git
+   cd Amazon-Clone
