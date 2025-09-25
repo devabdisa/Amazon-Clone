@@ -1,12 +1,11 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import classes from "./Results.module.css";
 import { useParams } from "react-router-dom";
-import { productUrl } from "../../Api/endPoints"; 
-import Layout from "../../components/LayOut/LayOut";
+import { productUrl } from "../../Api/endPoints";
+import Layout from "../../Components/Layout/Layout";
 import ProductCard from "../../components/Product/ProductCard";
 import Spinner from "../../Components/Loader/Spinner";
-
 
 function Results() {
   const [results, setResults] = useState([]);

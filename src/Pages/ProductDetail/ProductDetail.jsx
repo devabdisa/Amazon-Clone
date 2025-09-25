@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import ProductCard from "../../Components/Product/ProductCard";
-import Layout from "../../components/LayOut/LayOut";
+import Layout from "../../Components/Layout/Layout";
 import Spinner from "../../Components/Loader/Spinner";
 
 function ProductDetail() {
