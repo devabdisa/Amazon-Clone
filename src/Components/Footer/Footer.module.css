@@ -1,0 +1,153 @@
+.footer__container  {
+    background-color: #232f3e;
+    color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.back_to_top {
+    background-color: #37475a;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border-radius: 4px;
+}
+
+.back_to_top:hover {
+    background-color: #4a5c72;
+    transform: translateY(-2px);
+}
+
+.back_to_top p {
+    margin: 0;
+    color: #fff;
+}
+
+.footer_links {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 20px;
+    max-width: 1100px;
+    margin: auto;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer_column {
+    width: 22%;
+    min-width: 150px;
+}
+
+.footer_column h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #ff9900;
+}
+
+.footer_column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer_column ul li {
+    margin-bottom: 8px;
+}
+
+.footer_column ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer_column ul li a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer_bottom_container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px 0 10px;
+}
+
+.footer_logo img {
+    width: 90px;
+    margin-top: 10px;
+}
+
+.language_country {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.language_dropdown, .country_dropdown {
+    background: #232F3E;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language_dropdown select, .country_dropdown select {
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.country_dropdown img {
+    width: 25px;
+    border-radius: 3px;
+}
+
+.footer_bottom {
+    text-align: center;
+    padding: 15px;
+    background-color: #131a22;
+}
+
+.footer_bottom p {
+    font-size: 12px;
+    color: #fff;
+    margin: 4px 0;
+    font-weight: 600;
+}
+
+/* 📱 Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .footer_links {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+    }
+
+    .footer_column {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .language_country {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .back_to_top {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+}
