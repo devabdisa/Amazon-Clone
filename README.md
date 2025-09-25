@@ -1,34 +1,34 @@
-# Amazon Clone
+# 🛒 Amazon Clone
 
-A full-stack Amazon clone built with **Vite** and **React.js** featuring authentication, cart, orders, and Stripe payment integration.
+A **full-stack Amazon clone** built with **Vite** and **React.js**, featuring authentication, cart management, orders, and **Stripe** payment integration.
 
-**Live Demo:** [https://amazon-ecommerce-clone-dev-abdisa.netlify.app/](https://amazon-ecommerce-clone-dev-abdisa.netlify.app/)
-
----
-
-## Features
-
-- Firebase Authentication (Sign up / Sign in / Sign out)
-- Add, remove, and manage products in the cart
-- Place orders and view order history
-- Stripe payment integration for secure transactions
-- Responsive UI for desktop and mobile
+**🌐 Live Demo:** [Amazon Clone Demo](https://amazon-ecommerce-clone-dev-abdisa.netlify.app/)
 
 ---
 
-## Tech Stack
+## 🚀 Features
 
-- **Frontend:** Vite, React.js, React Router
-- **Backend:** Node.js
-- **Database:** Firebase Firestore
-- **Payments:** Stripe
-- **Deployment:** Render (backend), Netlify (frontend)
+- 🔐 **Firebase Authentication** (Sign up / Sign in / Sign out)  
+- 🛍️ **Cart Management** – Add, remove, and update products in the cart  
+- 🧾 **Orders** – Place orders and view order history  
+- 💳 **Stripe Payment Integration** – Secure online payments  
+- 📱 **Responsive UI** – Works on desktop and mobile devices  
 
 ---
 
-## Installation
+## 🛠️ Tech Stack
 
-1. Clone the repository:
+- **Frontend:** Vite, React.js, React Router  
+- **Backend:** Node.js  
+- **Database:** Firebase Firestore  
+- **Payments:** Stripe  
+- **Deployment:** Render (backend), Netlify (frontend)  
+
+---
+
+## ⚡ Installation
+
+1. Clone the repository:  
    ```bash
    git clone https://github.com/devabdisa/Amazon-Clone.git
    cd Amazon-Clone
